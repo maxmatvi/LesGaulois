@@ -22,4 +22,21 @@ public class Romain {
 		return "Le romain " + nom + " : ";
 	}
 
+	public void recevoirCoup(int forceCoup) {
+		force -= forceCoup;
+		if (force > 0) {
+			parler("Aie");
+		} else { 
+			force = 0;
+			parler("J'abandonne!");
+		}
+		
+	
+	}
+
+	@Override
+	public String toString() {
+		return nom;
+	}
+
 }
