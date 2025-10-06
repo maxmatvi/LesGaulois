@@ -26,12 +26,11 @@ public class Romain {
 		force -= forceCoup;
 		if (force > 0) {
 			parler("Aie");
-		} else { 
+		} else {
 			force = 0;
 			parler("J'abandonne!");
 		}
-		
-	
+
 	}
 
 	@Override
