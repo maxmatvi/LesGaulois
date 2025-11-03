@@ -4,6 +4,7 @@ public class Gaulois {
 	private String nom;
 	private int force;
 	private int effetPotion = 1;
+	private Village village;
 
 	public static void main(String[] args) {
 
@@ -47,6 +48,25 @@ public class Gaulois {
 
 	void boirePotion(int forcePotion) {
 		this.effetPotion = forcePotion;
+	}
+
+	public void setVillage(Village village) {
+		this.village = village;
+		
+	}
+	
+	public void SePresenter() {
+		if (village != null && village.getChef() == this) {
+			
+			parler("Bonjour , je m'appelle " + nom + ". Je suis le chef du village " + village.getNom() + ".");
+		} else if (village != null) {
+			parler("Bonjour , je m'appelle " + nom + ". Je suis dans le village " + village.getNom() + ".")
+			
+		} else {
+			parler("Bonjour , je m'appelle " + nom + ". Je voyage de villages en villages")
+			
+		}
+			
 	}
 
 }
