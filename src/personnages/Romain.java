@@ -11,10 +11,14 @@ public class Romain {
 		this.force = force;
 	}
 
+	public int getForce() {
+		return force;
+	}
+
 	public String getNom() {
 		return nom;
 	}
-
+	
 	public void parler(String texte) {
 		System.out.println(prendreParole() + "\"" + texte + "\"");
 
@@ -24,27 +28,88 @@ public class Romain {
 		return "Le romain " + nom + " : ";
 	}
 
-	public void recevoirCoup(int forceCoup) {
-		assert forceCoup > 0: "La force du coup doit etre positive";
-		
-		int forceAvant = force;
-		
+//	public void recevoirCoup(int forceCoup) {
+//		assert forceCoup > 0: "La force du coup doit etre positive";
+//		
+//		int forceAvant = force;
+//		
+//		force -= forceCoup;
+//		if (force > 0) {
+//			parler("Aie");
+//		} else {
+//			force = 0;
+//			parler("J'abandonne!");
+//		}
+//		assert force < forceAvant: "La force devrait avoir diminué";
+//		
+//		verifierInvariant();
+//	}
+	
+	
+	
+	
+	//Modifications TP3 POO
+	
+	
+	public Equipment[] recevoirCoup(int forceCoup) {
+		Equipment[] equipmentEjecte = null;
+		forceCoup = calculResistanceEquipment(forceCoup); 
 		force -= forceCoup;
-		if (force > 0) {
-			parler("Aie");
+		if (force==0) {
+			parler("Aïe");
 		} else {
-			force = 0;
-			parler("J'abandonne!");
+			equipmentEjecte = ejecterEquipment();
+			parler("J'abandonne...");
 		}
-		assert force < forceAvant: "La force devrait avoir diminué";
-		
-		verifierInvariant();
-	}
+		return equipmentEjecte;
+		}
 
 	@Override
 	public String toString() {
 		return nom;
 	}
+	
+	
+	private int calculResistanceEquipment(int forceCoup) {
+		String texte = " Ma force est de " + this.force + ", et la force du coup est de  "  + forceCoup;
+		int resistanceEquipment = 0;
+		if (nbEquipment != 0) {
+			texte += "\nMais heureusement, grace à mon équipement sa force est diminué de ";
+			for (int i = 0; i < nbEquipment; i++) {
+				if (equipments[i] != null &&
+		equipments[i].equals(Equipment.BOUCLIER)) {
+					resistanceEquipment += 8;
+				  } else {
+					System.out.println("Equipement casque");
+					resistanceEquipment += 5;
+			  }
+		   }
+		   texte += resistanceEquipment + "!";
+		}
+		parler(texte);
+		forceCoup -= resistanceEquipment;
+		return forceCoup;
+		}
+	
+	
+	private Equipment[] ejecterEquipment() {
+		Equipment[] equipmentEjecte = new Equipment[nbEquipment];
+		System.out.println("L'équipement de " + nom + " s'envole sous la force du coup.");
+		int nbEquipmentEjecte = 0;
+		for (int i = 0; i < nbEquipment; i++) {
+		   if (equipments[i] == null) {
+			   equipmentEjecte[nbEquipmentEjecte] = equipments[i];
+	   		   nbEquipmentEjecte++;
+	   		   equipments[i] = null;
+		   	   }
+		   }
+		   return equipmentEjecte;
+		}
+	
+	//Modifications TP3 POO , FIN
+	
+	
+	
 	
 	
 	
@@ -57,12 +122,6 @@ public class Romain {
 		assert isInvariantVerified(): "Invariant violé: force négative";
 	}
 	
-	
-
-	private int getForce() {
-		return force;
-	}
-
 	
 	
 	

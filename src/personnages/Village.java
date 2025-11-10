@@ -70,10 +70,10 @@ public class Village {
 	public static void main(String[] args) {
 		Gaulois abraracourcix = new Gaulois("Abraracourcix", 6);
 		
-		Village village = new Villae("Village des Irréductibles",30, abraracourcix);
+		Village village = new Village("Village des Irréductibles",30, abraracourcix);
 		
 		
-		Gaulois gaulois = village.trouverVillageois(30)
+		Gaulois gaulois = village.trouverVillageois(30);
 		
 				
 		Gaulois asterix = new Gaulois("Astérix", 8);
